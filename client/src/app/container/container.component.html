@@ -1,0 +1,15 @@
+<div class="container">
+    <app-homepage *ngIf="userSetup"></app-homepage>
+
+    <div *ngIf="!userSetup">
+        <form class="user-input-form card" #userInputForm="ngForm" (ngSubmit)="onUserSubmit(userInputForm.value)">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Your Username</label>
+                <input type="email" ngModel class="form-control" name="username" required placeholder="Sam" minlength="3">
+                <small id="emailHelp" class="form-text text-muted">This username will be used for all future comments in
+                    this session.</small>
+            </div>
+            <button type="submit" [disabled]="!userInputForm.valid" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>

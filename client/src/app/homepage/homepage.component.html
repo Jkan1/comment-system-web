@@ -1,0 +1,50 @@
+<div class="main-wrapper mt-5">
+    <div class="container ">
+
+        <div class="comment-area">
+            <h3>Hello {{userName}}</h3>
+            <div class="input-group">
+                <textarea class="form-control" [(ngModel)]="userMessage" rows="2" id="comment" placeholder="write your comment here"></textarea>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" (click)="postComment()">
+                        <i class="fa fa-search"></i> Submit
+                    </button>
+                </span>
+            </div>
+        </div>
+
+        <div class="text-center" *ngIf="loading">
+            <loading-spinner ></loading-spinner>
+        </div>
+        <div *ngIf="!loading">
+
+            <div class="comments mt-3"  *ngFor="let message of messages">
+                <div class="card comment-card w-100 shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">{{message.user}}</h5>
+                        <p class="float-right time">{{message.updatedAt| date:'medium'}}</p>
+                        <p class="card-text">{{message.data}}</p>
+                    </div>
+                </div>
+                <div class="comment-button">
+                    <a href="#" class="btn">Edit</a>
+                    <a href="#" class="btn ">Reply</a>
+                </div>
+    
+                <!-- <div class="card reply-comment-card w-70 shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">{{message.user}}</h5>
+                        <p class="float-right time">{{message.updatedAt| date:'medium'}}</p>
+                        <p class="card-text">{{message.data}}</p>
+                    </div>
+                </div>
+                <div class="reply-comment-buttons">
+                    <a href="#" class="btn">Edit</a>
+                    <a href="#" class="btn ">Reply</a>
+                </div> -->
+            </div>
+            
+        </div>
+
+    </div>
+</div>

@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+.comment-card,.reply-comment-card{
+    border-radius: 30px;
+}
+.time{
+position: absolute;
+top:0;
+right: 0;
+padding-top: 15px;
+padding-right: 15px;
+}
+.comment-button{
+    padding-left: 60px;
+}
+
+.comments .comment-button a{
+
+  font-weight: 500;
+}
+.reply-comment-card{
+margin-left:60px
+}
+.reply-comment-buttons{
+  padding-left: 120px;
+
+}
+.comments .reply-comment-buttons a{
+font-weight: 500;
+
+}
