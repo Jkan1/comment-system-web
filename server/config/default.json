@@ -1,0 +1,11 @@
+{
+    "PORT": 3000,
+    "API_KEY": "TEST_API_KEY_077",
+    "databaseSettings": {
+        "mongoDb": {
+            "host": "localhost",
+            "port": "27017",
+            "database": "comment-system-server"
+        }
+    }
+}
