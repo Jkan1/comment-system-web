@@ -5,6 +5,8 @@
         "mongoDb": {
             "host": "localhost",
             "port": "27017",
+            "user": "jkan1",
+            "password": "PassWord",
             "database": "comment-system-server"
         }
     }

@@ -16,7 +16,7 @@
                     </button>
                     <br>
                     <button *ngIf="isReply" class="btn btn-danger" type="button"
-                        (click)="userMessage='';isReply = false">
+                        (click)="userMessage='';isReply = false;editMessage=''">
                         <i class="fa fa-search"></i> Cancel
                     </button>
                     <button *ngIf="editMessage" class="btn btn-danger" type="button" (click)="postComment(true)">
@@ -41,9 +41,9 @@
                     </div>
                 </div>
                 <div class="comment-buttons">
-                    <a *ngIf="message.user === userName && !message.isDeleted" (click)="userMessage = message.data; editMessage = message._id"
+                    <a *ngIf="message.user === userName && !message.isDeleted" (click)="userMessage = message.data; editMessage = message._id; isReply=false"
                         class="btn">Edit</a>
-                    <a class="btn" (click)="isReply = true; replyTo = message._id">Reply</a>
+                    <a class="btn" (click)="isReply = true; replyTo = message._id; editMessage=''; userMessage=''">Reply</a>
                 </div>
                 <div *ngFor="let comment of message.comments">
                     <div class="card reply-comment-card w-70 shadow-lg">
@@ -56,8 +56,8 @@
                     </div>
                     <div class="reply-comment-buttons">
                         <a *ngIf="comment.user === userName && !comment.isDeleted"
-                            (click)="userMessage = comment.data; editMessage = comment._id" class="btn">Edit</a>
-                        <a class="btn" (click)="isReply = true; replyTo = comment._id">Reply</a>
+                            (click)="userMessage = comment.data; editMessage = comment._id; isReply=false" class="btn">Edit</a>
+                        <a class="btn" (click)="isReply = true; replyTo = comment._id; editMessage=''; userMessage=''">Reply</a>
                     </div>
 
                     <div *ngFor="let innerComment of comment.comments">
@@ -72,7 +72,7 @@
                         </div>
                         <div class="inner-comment-buttons">
                             <a *ngIf="innerComment.user === userName && !innerComment.isDeleted"
-                                (click)="userMessage = innerComment.data; editMessage = innerComment._id"
+                                (click)="userMessage = innerComment.data; editMessage = innerComment._id; isReply=false"
                                 class="btn">Edit</a>
                         </div>
                     </div>
