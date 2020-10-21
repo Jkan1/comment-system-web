@@ -1,5 +1,5 @@
 <div class="container">
-    <app-homepage *ngIf="userSetup"></app-homepage>
+    <app-homepage *ngIf="userSetup" (logout)="userSetup=false"></app-homepage>
 
     <div *ngIf="!userSetup">
         <form class="user-input-form card" #userInputForm="ngForm" (ngSubmit)="onUserSubmit(userInputForm.value)">

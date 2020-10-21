@@ -11,20 +11,30 @@ async function getComments(requestData) {
             criteria._id = requestData.id
             result = await Models.Message.findOne(criteria).populate({ path: 'comments' });
             result = result.comments;
-        }else {
+        } else {
             criteria.isComment = false;
-            result = await Models.Message.find(criteria);
+            result = await Models.Message.find(criteria).sort({ _id: -1 }).populate('comments').populate({ path: 'comments.comments' });
+            result = await Models.Message.populate(result, { path: 'comments.comments' });
         }
         return result;
 
     } catch (error) {
         console.error(error);
-        return null;
+        return [];
     }
 }
 
 async function postComments(requestObject) {
     try {
+
+        if(requestObject.id){
+            const update = { data: requestObject.data};
+            if (requestObject.isDeleted != null){
+                update.isDeleted = requestObject.isDeleted;
+            }
+            const result = await Models.Message.findOneAndUpdate({ _id: requestObject.id }, update);
+            return result;
+        }
 
         const newMessage = await Models.Message.create(requestObject)
         if (requestObject.isComment)

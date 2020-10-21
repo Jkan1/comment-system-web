@@ -15,7 +15,6 @@ export class ApiService {
         if (requestData && requestData.id) {
             url += `?id=${requestData.id}`;
         }
-        console.log(url);
         return this.http.get(url, { headers: new HttpHeaders({ 'x-api-key': environment.apiKey }) }).pipe(
             map((res: { code: number, data: any, message: string }) => {
                 return res ? res.data : [];

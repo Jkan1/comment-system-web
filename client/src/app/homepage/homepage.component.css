@@ -1,0 +1,22 @@
+
+.input-group-btn {
+    margin: 10px;
+}
+
+.input-group-btn .btn {
+    width: 100px;
+    margin: 1px;
+}
+
+.deleted-text {
+    font-style: italic;
+    color: darkgray;
+}
+
+.card {
+    margin-top: 5px;
+}
+
+.user-bar h3,.user-bar .button{
+    display: inline-block;
+}

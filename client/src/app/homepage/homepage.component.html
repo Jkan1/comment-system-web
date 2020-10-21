@@ -2,48 +2,85 @@
     <div class="container ">
 
         <div class="comment-area">
-            <h3>Hello {{userName}}</h3>
+            <div class="user-bar">
+                <h3 >Hello {{userName}}</h3>
+                <button class="btn-danger btn-sm shadow-none float-right" type="button" (click)="onLogout()">Logout</button>
+            </div>
+
             <div class="input-group">
-                <textarea class="form-control" [(ngModel)]="userMessage" rows="2" id="comment" placeholder="write your comment here"></textarea>
+                <textarea class="form-control" [(ngModel)]="userMessage" rows="2" id="comment"
+                    placeholder="write your comment here"></textarea>
                 <span class="input-group-btn">
                     <button class="btn btn-primary" type="button" (click)="postComment()">
-                        <i class="fa fa-search"></i> Submit
+                        <i class="fa fa-search"></i> {{isReply ? 'Reply' : 'Post'}}
+                    </button>
+                    <br>
+                    <button *ngIf="isReply" class="btn btn-danger" type="button"
+                        (click)="userMessage='';isReply = false">
+                        <i class="fa fa-search"></i> Cancel
+                    </button>
+                    <button *ngIf="editMessage" class="btn btn-danger" type="button" (click)="postComment(true)">
+                        <i class="fa fa-search"></i> Delete
                     </button>
                 </span>
             </div>
         </div>
 
         <div class="text-center" *ngIf="loading">
-            <loading-spinner ></loading-spinner>
+            <loading-spinner></loading-spinner>
         </div>
         <div *ngIf="!loading">
 
-            <div class="comments mt-3"  *ngFor="let message of messages">
+            <div class="comments mt-3" *ngFor="let message of messages">
                 <div class="card comment-card w-100 shadow-lg">
                     <div class="card-body">
                         <h5 class="card-title">{{message.user}}</h5>
                         <p class="float-right time">{{message.updatedAt| date:'medium'}}</p>
-                        <p class="card-text">{{message.data}}</p>
+                        <p class="card-text">{{message.isDeleted ? '' : message.data}} <span *ngIf="message.isDeleted"
+                                class="deleted-text">DELETED</span></p>
                     </div>
                 </div>
-                <div class="comment-button">
-                    <a href="#" class="btn">Edit</a>
-                    <a href="#" class="btn ">Reply</a>
+                <div class="comment-buttons">
+                    <a *ngIf="message.user === userName && !message.isDeleted" (click)="userMessage = message.data; editMessage = message._id"
+                        class="btn">Edit</a>
+                    <a class="btn" (click)="isReply = true; replyTo = message._id">Reply</a>
                 </div>
-    
-                <!-- <div class="card reply-comment-card w-70 shadow-lg">
-                    <div class="card-body">
-                        <h5 class="card-title">{{message.user}}</h5>
-                        <p class="float-right time">{{message.updatedAt| date:'medium'}}</p>
-                        <p class="card-text">{{message.data}}</p>
+                <div *ngFor="let comment of message.comments">
+                    <div class="card reply-comment-card w-70 shadow-lg">
+                        <div class="card-body">
+                            <h6 class="card-title">{{comment.user}}</h6>
+                            <p class="float-right time">{{comment.updatedAt| date:'medium'}}</p>
+                            <p class="card-text">{{comment.isDeleted ? '' : comment.data}} <span
+                                    *ngIf="comment.isDeleted" class="deleted-text">DELETED</span></p>
+                        </div>
                     </div>
+                    <div class="reply-comment-buttons">
+                        <a *ngIf="comment.user === userName && !comment.isDeleted"
+                            (click)="userMessage = comment.data; editMessage = comment._id" class="btn">Edit</a>
+                        <a class="btn" (click)="isReply = true; replyTo = comment._id">Reply</a>
+                    </div>
+
+                    <div *ngFor="let innerComment of comment.comments">
+                        <div class="card inner-comment-card w-70 shadow-lg">
+                            <div class="card-body">
+                                <h7 class="card-title">{{innerComment.user}}</h7>
+                                <p class="float-right time">{{innerComment.updatedAt| date:'medium'}}</p>
+                                <p class="card-text">{{innerComment.isDeleted ? '' : innerComment.data}}
+                                    <span *ngIf="innerComment.isDeleted" class="deleted-text">DELETED</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="inner-comment-buttons">
+                            <a *ngIf="innerComment.user === userName && !innerComment.isDeleted"
+                                (click)="userMessage = innerComment.data; editMessage = innerComment._id"
+                                class="btn">Edit</a>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="reply-comment-buttons">
-                    <a href="#" class="btn">Edit</a>
-                    <a href="#" class="btn ">Reply</a>
-                </div> -->
+
             </div>
-            
+
         </div>
 
     </div>

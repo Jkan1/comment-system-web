@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-.comment-card,.reply-comment-card{
-    border-radius: 30px;
+.comment-card,.reply-comment-card,.inner-comment-card{
+    border-radius: 20px;
 }
 .time{
 position: absolute;
@@ -10,22 +10,42 @@ right: 0;
 padding-top: 15px;
 padding-right: 15px;
 }
-.comment-button{
-    padding-left: 60px;
+
+.comment-buttons{
+    padding-left: 10px;
+    font-size: small;
 }
 
-.comments .comment-button a{
-
+.comments .comment-buttons a{
   font-weight: 500;
 }
+
 .reply-comment-card{
-margin-left:60px
+  margin-left:60px
 }
 .reply-comment-buttons{
-  padding-left: 120px;
-
+  padding-left: 130px;
+  font-size: small;
 }
 .comments .reply-comment-buttons a{
-font-weight: 500;
+  font-weight: 500;
+}
 
+.inner-comment-card{
+  margin-left:150px;
+}
+.inner-comment-buttons{
+  padding-left: 230px;
+  font-size: small;
+}
+.comments .inner-comment-buttons a{
+  font-weight: 500;
+}
+
+div p {
+  font-size: small;
+}
+
+.card-body {
+  padding: 10px;
 }
